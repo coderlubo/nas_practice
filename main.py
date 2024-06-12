@@ -1,53 +1,55 @@
-from utils.dealCode import cross_code, init, mutate_code
+import numpy as np
+
+from utils.dealCode import init, mutate_code, cross_code
 from utils.findBest import find_best
 from utils.generateOffspring import generate_offspring
-from utils.getData import get_data
-from utils.myLog import get_logger
-from utils.settings import CROSS_RATE, GENERATE_OFFSPRING_EPOCHS, INITIAL_POPULATION, MUTATE_RATE
+from utils.settings import GENERATE_OFFSPRING_EPOCHS
 from utils.testModel import test_model
 
+from utils.globalsVar import set_data, set_logger
 
-logger = get_logger()
-train_load, eval_load, test_load = get_data()
+logger = set_logger()
+train_load, eval_load, test_load = set_data()
 
 
 population = init()
 
-
-for i in range(GENERATE_OFFSPRING_EPOCHS):
-    logger.info("Generate {}:".format(i+1))
-
-    offspring = generate_offspring(population, train_load, eval_load)
-
-    # 每一代的最优个体
-    best_individual = find_best(offspring, train_load, eval_load)
-    logger.info("Best Fitness: \t {}".format(best_individual.fitness))
-
+for epoch in range(GENERATE_OFFSPRING_EPOCHS):
     # 到达最后一代
-    if i == GENERATE_OFFSPRING_EPOCHS - 1:
+    if epoch == GENERATE_OFFSPRING_EPOCHS - 1:
         break
 
+    logger.info("Generate {}:\n".format(epoch+1))
+
+    population = generate_offspring(population)
+
+    # 每一代的最优个体
+    best_individual = find_best(population)
+    logger.info("\nBest Fitness: \t {}\n".format(best_individual.fitness))
+
     # 交叉
-    for i in range(len(offspring)):
+    for i in range(len(population)-1):
 
         if i % 2 == 0:
-            offspring[i].code, offspring[i+1].code = cross_code(offspring[i].code, offspring[i+1].code)
-            del offspring[i].fitness
-            del offspring[i+1].fitness
 
+            population[i].code, population[i+1].code = cross_code(population[i].code, population[i+1].code)
     
     # 变异
-    for i in range(len(offspring)):
+    for i in range(len(population)):
 
-            offspring[i].code = mutate_code(offspring[i].code)
-            del offspring[i+1].fitness
+        population[i].code = mutate_code(population[i].code)
+        
+        if hasattr(population[i], "fitness"): 
+            delattr(population[i], "fitness")
 
-best_individual = find_best(offspring)
+best_individual = find_best(population)
 
 # 使用测试集进行最终测试
 accuracy = test_model(best_individual.model, test_load)
 
 logger.info("Test Accuracy: {}".format(accuracy*100))
+logger.info("code: {}".format(best_individual.code))
+logger.info(best_individual.model)
 
 
 

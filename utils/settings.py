@@ -2,6 +2,29 @@ import time
 import torch
 
 
+# 数据集 MNIST、CIFAR10
+DATA_SET = "CIFAR10"
+
+# Model
+BATCH_SIZE = 64
+EPOCHS = 5
+DEVICE = 'cuda:0' if torch.cuda.is_available() else 'cpu'
+INITIAL_CHANNEL = 3
+
+
+# 进化算法
+GENERATE_OFFSPRING_EPOCHS = 50
+INITIAL_POPULATION = 50
+INDIVIDUAL_COUNT = 5   # 锦标赛个体数量
+
+# 概率
+ADD_LAYER_RATE = .5
+CROSS_RATE = .5
+MUTATE_RATE = .1
+
+LOGGER_PATH = "./logs/" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '.log'
+
+# 编码模型
 MAX_LAYERS = 5
 
 MAX_NEURONS = 128
@@ -22,23 +45,3 @@ POOLING_LAYER_LEN = 2
 
 LINEAR_LAYER = -3
 LINEAR_LAYER_LEN = 2
-
-# Model
-BATCH_SIZE = 64
-EPOCHS = 20
-DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
-
-
-# 进化算法
-GENERATE_OFFSPRING_EPOCHS = 10
-INITIAL_POPULATION = 20
-INDIVIDUAL_COUNT = 5    # 锦标赛个体数量
-
-# 概率
-ADD_LAYER_RATE = .5
-CROSS_RATE = .5
-MUTATE_RATE = .1
-
-
-
-LOGGER_PATH = "./logs/" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '.log'

@@ -1,7 +1,7 @@
 from torch import nn
 
 from utils.myNet import Net
-from utils.settings import CONV_LAYER, CONV_LAYER_LEN, DEVICE, LINEAR_LAYER, LINEAR_LAYER_LEN, POOLING_LAYER, POOLING_LAYER_LEN
+from utils.settings import CONV_LAYER, CONV_LAYER_LEN, DEVICE, INITIAL_CHANNEL, LINEAR_LAYER, LINEAR_LAYER_LEN, POOLING_LAYER, POOLING_LAYER_LEN
 
 def build_model(code):
     model = nn.Sequential()
@@ -14,7 +14,7 @@ def build_model(code):
         if code[i] == CONV_LAYER:
             
             if i == 0:
-                model.append(nn.Conv2d(in_channels=3, out_channels=code[i+1], kernel_size=code[i+2]))
+                model.append(nn.Conv2d(in_channels=INITIAL_CHANNEL, out_channels=code[i+1], kernel_size=code[i+2]))
             else:
                 model.append(nn.Conv2d(in_channels=last_neurons, out_channels=code[i+1], kernel_size=code[i+2]))
         

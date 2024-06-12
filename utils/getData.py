@@ -1,23 +1,25 @@
 from torch.utils.data import DataLoader, Subset
 from torchvision import datasets, transforms
 
-from utils.settings import BATCH_SIZE
+from utils.settings import BATCH_SIZE, DATA_SET
 
 trans = transforms.Compose([
     transforms.ToTensor()
 ])
 
-
-
 def get_data():
 
-    # CIFAR10
-    # train_set = datasets.CIFAR10("./data", train=True, transform=trans, download=True)
-    # test_set = datasets.CIFAR10("./data", train=False, transform=trans, download=True)  
+    train_set, test_set = None, None
 
-    # MINST
-    train_set = datasets.MNIST("./data", train=True, transform=trans, download=True)
-    test_set = datasets.MNIST("./data", train=False, transform=trans, download=True)  
+    if DATA_SET == "CIFAR10":
+        # CIFAR10
+        train_set = datasets.CIFAR10("./data", train=True, transform=trans, download=True)
+        test_set = datasets.CIFAR10("./data", train=False, transform=trans, download=True)  
+
+    elif DATA_SET == "MNIST":
+        # MINST
+        train_set = datasets.MNIST("./data", train=True, transform=trans, download=True)
+        test_set = datasets.MNIST("./data", train=False, transform=trans, download=True)  
 
     # 从训练集中取出一部分作为验证集
     train_len = len(train_set)

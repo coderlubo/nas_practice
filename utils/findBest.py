@@ -1,9 +1,9 @@
-def find_best(offspring, train_load, eval_load):
+def find_best(offspring):
     
     for i in range(len(offspring)):
         if hasattr(offspring[i], "fitness") == False:
-            offspring[i].set_fitness(train_load, eval_load)
+            offspring[i].set_fitness()
 
-    best_obj = max(offspring, lambda obj: obj.fitness)
+    best_obj = max(offspring, key=lambda obj: obj.fitness)
 
     return best_obj
