@@ -1,5 +1,16 @@
 import random
-from utils.settings import CONV_LAYER, CONV_LAYER_LEN, CROSS_RATE, LINEAR_LAYER, LINEAR_LAYER_LEN, MAX_KERNAL, MIN_KERNAL, MUTATE_RATE, POOLING_LAYER, POOLING_LAYER_LEN
+from utils.generateIndividual import generate_individual
+from utils.myIndividual import Individual
+from utils.settings import CONV_LAYER, CONV_LAYER_LEN, CROSS_RATE, INITIAL_POPULATION, LINEAR_LAYER, LINEAR_LAYER_LEN, MAX_KERNAL, MIN_KERNAL, MUTATE_RATE, POOLING_LAYER, POOLING_LAYER_LEN
+
+def init():
+    population = []
+
+    for i in range(INITIAL_POPULATION):
+        ind = Individual(generate_individual())
+        population.append(ind)
+    
+    return population
 
 def get_layers(code, layer_type):
     list = []

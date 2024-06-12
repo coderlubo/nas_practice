@@ -1,5 +1,6 @@
 from torch import nn
 
+from utils.myNet import Net
 from utils.settings import CONV_LAYER, CONV_LAYER_LEN, DEVICE, LINEAR_LAYER, LINEAR_LAYER_LEN, POOLING_LAYER, POOLING_LAYER_LEN
 
 def build_model(code):
@@ -13,7 +14,7 @@ def build_model(code):
         if code[i] == CONV_LAYER:
             
             if i == 0:
-                model.append(nn.Conv2d(in_channels=1, out_channels=code[i+1], kernel_size=code[i+2]))
+                model.append(nn.Conv2d(in_channels=3, out_channels=code[i+1], kernel_size=code[i+2]))
             else:
                 model.append(nn.Conv2d(in_channels=last_neurons, out_channels=code[i+1], kernel_size=code[i+2]))
         
@@ -36,6 +37,8 @@ def build_model(code):
             i += LINEAR_LAYER_LEN
 
     model.append(nn.Linear(in_features=code[-1], out_features=10))
+
+    model = Net(model)
     model.to(DEVICE)
 
     return model

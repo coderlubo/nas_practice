@@ -12,8 +12,8 @@ trans = transforms.Compose([
 def get_data():
 
     # CIFAR10
-    train_set = datasets.CIFAR10("./data", train=True, transform=trans, download=True)
-    test_set = datasets.CIFAR10("./data", train=False, transform=trans, download=True)  
+    # train_set = datasets.CIFAR10("./data", train=True, transform=trans, download=True)
+    # test_set = datasets.CIFAR10("./data", train=False, transform=trans, download=True)  
 
     # MINST
     train_set = datasets.MNIST("./data", train=True, transform=trans, download=True)

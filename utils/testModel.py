@@ -25,8 +25,8 @@ def test_model(model, test_load):
             correct += max_index.eq(target.view_as(max_index)).sum().item()
 
         test_loss /= len(test_load.dataset)
-        accuracy = 100.0 * correct / len(test_load.dataset)
+        accuracy = correct / len(test_load.dataset)
 
-        print("Test -- Average loss: {:.4f}, Accuracy : {:.3f}\n".format(test_loss, accuracy))
+        # print("Test -- Average loss: {:.4f}, Accuracy : {:.3f}\n".format(test_loss, accuracy))
 
     return accuracy

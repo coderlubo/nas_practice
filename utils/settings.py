@@ -1,3 +1,4 @@
+import time
 import torch
 
 
@@ -22,13 +23,6 @@ POOLING_LAYER_LEN = 2
 LINEAR_LAYER = -3
 LINEAR_LAYER_LEN = 2
 
-
-# 概率
-ADD_LAYER_RATE = 1
-CROSS_RATE = .5
-MUTATE_RATE = .5
-
-
 # Model
 BATCH_SIZE = 64
 EPOCHS = 20
@@ -36,4 +30,15 @@ DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 
 # 进化算法
-INITIAL_POPULATION = 10
+GENERATE_OFFSPRING_EPOCHS = 10
+INITIAL_POPULATION = 20
+INDIVIDUAL_COUNT = 5    # 锦标赛个体数量
+
+# 概率
+ADD_LAYER_RATE = .5
+CROSS_RATE = .5
+MUTATE_RATE = .1
+
+
+
+LOGGER_PATH = "./logs/" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '.log'

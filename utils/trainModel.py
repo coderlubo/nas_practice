@@ -19,6 +19,6 @@ def train_model(model, train_load, optim):
 
         optim.step()
 
-        if batch_index % 300 == 0:
+        # if batch_index % 300 == 0:
             
-            print("batch index: {} \t  Loss:{:.6f}".format(batch_index, result_loss.item()))
+            # print("batch index: {} \t  Loss:{:.6f}".format(batch_index, result_loss.item()))
