@@ -7,8 +7,7 @@ def init():
     population = []
 
     for i in range(INITIAL_POPULATION):
-        ind = Individual(generate_individual())
-        population.append(ind)
+        population.append(Individual(generate_individual()))
     
     return population
 

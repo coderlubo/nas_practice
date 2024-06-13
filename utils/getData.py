@@ -26,6 +26,7 @@ def get_data():
     eval_len = int(0.1*train_len)
 
     eval_set = Subset(train_set, range(eval_len))
+    # train_set = Subset(train_set, range(eval_len, eval_len*2))
     train_set = Subset(train_set, range(eval_len, train_len))
 
     train_load = DataLoader(train_set, batch_size=BATCH_SIZE)

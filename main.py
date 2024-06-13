@@ -3,6 +3,7 @@ import numpy as np
 from utils.dealCode import init, mutate_code, cross_code
 from utils.findBest import find_best
 from utils.generateOffspring import generate_offspring
+from utils.myIndividual import Individual
 from utils.settings import GENERATE_OFFSPRING_EPOCHS
 from utils.testModel import test_model
 
@@ -32,15 +33,15 @@ for epoch in range(GENERATE_OFFSPRING_EPOCHS):
 
         if i % 2 == 0:
 
-            population[i].code, population[i+1].code = cross_code(population[i].code, population[i+1].code)
+            code1, code2 = cross_code(population[i].code, population[i+1].code)
+            population[i] = Individual(code1)
+            population[i+1] = Individual(code2)
     
     # 变异
     for i in range(len(population)):
 
         population[i].code = mutate_code(population[i].code)
         
-        if hasattr(population[i], "fitness"): 
-            delattr(population[i], "fitness")
 
 best_individual = find_best(population)
 
