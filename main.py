@@ -4,6 +4,7 @@ from utils.dealCode import init, mutate_code, cross_code
 from utils.findBest import find_best
 from utils.generateOffspring import generate_offspring
 from utils.myIndividual import Individual
+from utils.printInfo import print_info
 from utils.settings import GENERATE_OFFSPRING_EPOCHS
 from utils.testModel import test_model
 
@@ -12,7 +13,7 @@ from utils.globalsVar import set_data, set_logger
 logger = set_logger()
 train_load, eval_load, test_load = set_data()
 
-
+print_info()
 population = init()
 
 for epoch in range(GENERATE_OFFSPRING_EPOCHS):
@@ -20,13 +21,14 @@ for epoch in range(GENERATE_OFFSPRING_EPOCHS):
     if epoch == GENERATE_OFFSPRING_EPOCHS - 1:
         break
 
-    logger.info("Generate {}:\n".format(epoch+1))
+    # logger.info("Generate {}:\n".format(epoch+1))
 
     population = generate_offspring(population)
 
     # 每一代的最优个体
     best_individual = find_best(population)
-    logger.info("\nBest Fitness: \t {}\n".format(best_individual.fitness))
+    # logger.info("\nBest Fitness: \t {}\n".format(best_individual.fitness))
+    logger.info("Generate {:<3}: \t Best Fitness: {}".format(epoch+1, best_individual.fitness))
 
     # 交叉
     for i in range(len(population)-1):

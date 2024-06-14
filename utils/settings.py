@@ -1,21 +1,23 @@
 import time
 import torch
 
+# 训练名
+TRAIN_NAME = "nas"
 
 # 数据集 MNIST、CIFAR10
 DATA_SET = "CIFAR10"
 
-# Model
+# Model/home/lubo/miniconda3/envs/pt/bin/python /home/lubo/nas_practice/main.py
 BATCH_SIZE = 64
-EPOCHS = 10
-DEVICE = 'cuda:0' if torch.cuda.is_available() else 'cpu'
+EPOCHS = 5
+DEVICE = 'cuda:5' if torch.cuda.is_available() else 'cpu'
 INITIAL_CHANNEL = 3
 
 
 # 进化算法
 GENERATE_OFFSPRING_EPOCHS = 500
-INITIAL_POPULATION = 100
-INDIVIDUAL_COUNT = 10   # 锦标赛个体数量
+INITIAL_POPULATION = 50
+INDIVIDUAL_COUNT = 5  # 锦标赛个体数量
 
 # 概率
 ADD_LAYER_RATE = .5
@@ -25,7 +27,7 @@ MUTATE_RATE = .1
 LOGGER_PATH = "./logs/" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '.log'
 
 # 编码模型
-MAX_LAYERS = 6
+MAX_LAYERS = 8
 
 MAX_NEURONS = 128
 MIN_NEURONS = 16

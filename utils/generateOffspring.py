@@ -25,6 +25,7 @@ def generate_offspring(population):
 
                 except Exception as e:
 
+                    print(e)
                     population[index].fitness = 0
                     
 
